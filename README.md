@@ -84,6 +84,8 @@ Swarm initialized: current node is now a manager.
 
 We will also see a worker join token.
 
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/docker%20swarm%20init.PNG?raw=true)
+
 ---
 
 # Step 3 – Verify the Swarm
@@ -98,8 +100,12 @@ instead of:
 
 Swarm: inactive
 
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/docker%20info.PNG?raw=true)
+
 ---
 
 # Step 4 – View the Nodes
 
 Run: docker node ls
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/docker%20node%20ls.PNG?raw=true)

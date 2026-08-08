@@ -165,3 +165,44 @@ Run: docker network inspect employee-network
 ![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/docker%20network%20inspect.PNG?raw=true)
 
 ![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/docker%20netowrk%20inspect%20extension.PNG?raw=true)
+
+---
+
+# Deploy Your First Swarm Service
+
+# Step 1 – Stop the Existing Employee Service Container
+
+Run: docker stop employee-service
+
+Verify: docker ps
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/docker%20stop%20employee-service.PNG?raw=true)
+
+---
+
+# Step 2 – Deploy Employee Service as a Swarm Service
+
+Run:  docker service create --name employee-service --network employee-network --publish 3001:3001 --replicas 3 employee-management-system-employee-service:latest
+
+# Step 3 – Check the Service
+
+Run: docker service ls
+
+Expected:
+
+NAME               MODE        REPLICAS
+employee-service   replicated  3/3
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/docker%20service%20create%20ls.PNG?raw=true)
+
+---
+
+# Step 4 – View Running Tasks
+
+Run: docker service ps employee-service
+
+# Step 5 – View the Containers
+
+Run: docker ps
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/docker%20service%20ps.PNG?raw=true)

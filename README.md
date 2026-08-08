@@ -68,3 +68,38 @@ Swarm continuously works to maintain exactly three healthy replicas.
 
 ---
 
+# Initialize Docker Swarm
+
+# Step 1 – Open Terminal
+
+Go to our project directory terminal where Docker is available.
+
+---
+
+# Step 2 – Initialize Swarm
+
+Run: docker swarm init
+
+Swarm initialized: current node is now a manager.
+
+We will also see a worker join token.
+
+---
+
+# Step 3 – Verify the Swarm
+
+Run: docker info
+
+We should now see:
+
+Swarm: active
+
+instead of:
+
+Swarm: inactive
+
+---
+
+# Step 4 – View the Nodes
+
+Run: docker node ls

@@ -402,22 +402,32 @@ Users continue accessing the application throughout the update.
 Open:
 
 employee-management-system/
+
 └── employee-service/
+
     └── app.js
 
 const express = require("express");
+
 const os = require("os");
 
 const app = express();
 
 app.get("/", (req, res) => {
+
     res.send(`
+    
         <h1>Employee Service - Version 2</h1>
+        
         <h2>Docker Swarm Rolling Update Demo</h2>
+        
         <p>Container: ${os.hostname()}</p>
+        
     `);
+    
 });
 
 app.listen(3001, () => {
+
     console.log("Employee Service running on port 3001");
 });

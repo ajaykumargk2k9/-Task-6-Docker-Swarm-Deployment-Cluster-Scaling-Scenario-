@@ -257,3 +257,42 @@ docker ps
 You should now see five Employee Service containers.
 
 ![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/docker%20service%20ps%20scale.PNG?raw=true)
+
+---
+
+# Auto Healing (Self-Healing)
+
+Suppose our application has 5 replicas:
+
+Replica 1
+Replica 2
+Replica 3
+Replica 4
+Replica 5
+
+Suddenly:
+
+Replica 3 ❌ Crashes
+
+Without Swarm:
+
+Users lose capacity.
+An administrator must manually restart the container.
+
+With Swarm:
+
+Replica 3 ❌
+
+↓
+
+Swarm detects failure
+
+↓
+
+Creates a replacement automatically
+
+↓
+
+Replica 6 ✅
+
+The service returns to the desired count without manual intervention.

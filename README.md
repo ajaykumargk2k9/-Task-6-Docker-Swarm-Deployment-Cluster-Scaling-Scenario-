@@ -431,3 +431,78 @@ app.listen(3001, () => {
 
     console.log("Employee Service running on port 3001");
 });
+
+
+---
+
+# Step 2 – Build Version 2 Image
+
+Go to:
+
+employee-management-system/employee-service
+
+Build a new image:
+
+docker build -t employee-management-system-employee-service:v2 .
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/rolling%20build.PNG?raw=true)
+
+---
+
+# Step 3 – Verify
+
+Run: docker images
+
+You should now see:
+
+employee-management-system-employee-service
+
+latest
+
+v2
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/rolling%20images.PNG?raw=true)
+
+---
+
+# Step 4 – Perform the Rolling Update
+
+Run: docker service update --image employee-management-system-employee-service:v2 employee-service
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/rolling%20service%20update.PNG?raw=true)
+
+---
+
+# Step 5 – Watch the Update
+
+Run: docker service ps employee-service
+
+We should see:
+
+Running
+
+Shutdown
+
+Running
+
+Shutdown
+
+Swarm replaces replicas one by one until all are using v2.
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/rolling%20service%20ps.PNG?raw=true)
+
+---
+
+# Step 6 – Verify
+
+Open: http://localhost:3001
+
+We should see:
+
+Employee Service Version 2
+
+Refresh the page several times.
+
+The hostname may change as different replicas serve your requests.
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/Rolling%20employee%20service.PNG?raw=true)

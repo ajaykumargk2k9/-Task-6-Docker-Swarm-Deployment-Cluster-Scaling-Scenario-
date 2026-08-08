@@ -296,3 +296,31 @@ Creates a replacement automatically
 Replica 6 ✅
 
 The service returns to the desired count without manual intervention.
+
+---
+
+# Step 1 – List Running Containers
+
+docker ps
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/docker%20ps%20auto-healing.PNG?raw=true)
+
+# Step 2 – Stop the Container
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/docker%20stop%20auto-healing.PNG?raw=true)
+
+# Step 3 – Immediately Watch the Service
+
+Run: docker service ps employee-service
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/docker%20service%20ps%20auto-healing.PNG?raw=true)
+
+# Step 4 – Verify Containers
+
+Run: docker ps
+
+We should still see 5 running Employee Service containers even though we manually stopped one.
+
+This proves that Swarm is enforcing the desired state.
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/docker%20ps%20auto-healing%20extension.PNG?raw=true)

@@ -206,3 +206,54 @@ Run: docker service ps employee-service
 Run: docker ps
 
 ![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/docker%20service%20ps.PNG?raw=true)
+
+---
+
+# Scaling & Load Balancing
+
+# Step 1 – Scale to 5 Replicas
+
+Run: docker service scale employee-service=5
+
+Expected output:
+
+overall progress: 5 out of 5 tasks
+verify: Service converged
+
+# Step 2 – Verify
+
+docker service ls
+
+Expected:
+
+employee-service
+
+5/5
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/docker%20service%20scale.PNG?raw=true)
+
+---
+
+# Step 3 – Inspect Tasks
+
+docker service ps employee-service
+
+Expected:
+
+employee-service.1
+
+employee-service.2
+
+employee-service.3
+
+employee-service.4
+
+employee-service.5
+
+# Step 4 – Check Containers
+
+docker ps
+
+You should now see five Employee Service containers.
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/docker%20service%20ps%20scale.PNG?raw=true)

@@ -109,3 +109,59 @@ Swarm: inactive
 Run: docker node ls
 
 ![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/docker%20node%20ls.PNG?raw=true)
+
+---
+
+# Create an Overlay Network
+
+In Swarm services may run on different nodes so we need an overlay network.
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/Overlay%20Network.PNG?raw=true)
+
+---
+
+# Step 1 – View Existing Networks
+
+Run: docker network ls
+
+We should see something like:
+
+bridge
+host
+none
+ingress
+docker_gwbridge
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/docker%20network%20ls.PNG?raw=true)
+
+---
+
+# Step 2 – Create Your Own Overlay Network
+
+Run: docker network create --driver overlay employee-network
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/docker%20network%20create.PNG?raw=true)
+
+---
+
+# Step 3 – Verify the Network
+
+Run: docker network ls
+
+We should now see something similar to:
+
+NETWORK ID       NAME               DRIVER
+xxxx             employee-network   overlay
+xxxx             ingress            overlay
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/docker%20network%20ls%20verify.PNG?raw=true)
+
+---
+
+Step 4 – Inspect the Network
+
+Run: docker network inspect employee-network
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/docker%20network%20inspect.PNG?raw=true)
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/docker%20netowrk%20inspect%20extension.PNG?raw=true)

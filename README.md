@@ -324,3 +324,100 @@ We should still see 5 running Employee Service containers even though we manuall
 This proves that Swarm is enforcing the desired state.
 
 ![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/docker%20ps%20auto-healing%20extension.PNG?raw=true)
+
+---
+
+# Rolling Updates & Rollback
+
+Imagine our Employee Service is currently running:
+
+Employee Service v1
+
+Replica 1
+Replica 2
+Replica 3
+Replica 4
+Replica 5
+
+Your development team fixes a bug and releases:
+
+Employee Service v2
+
+---
+
+# Traditional Deployment
+
+Stop all containers ❌
+
+Deploy new version
+
+Start all containers
+
+Problem:
+
+❌ Application is unavailable during the deployment.
+
+# Docker Swarm Rolling Update
+
+Instead of stopping everything, Swarm updates one replica at a time.
+
+Before
+
+v1 v1 v1 v1 v1
+
+↓
+
+Update Replica 1
+
+v2 v1 v1 v1 v1
+
+↓
+
+Update Replica 2
+
+v2 v2 v1 v1 v1
+
+↓
+
+Update Replica 3
+
+v2 v2 v2 v1 v1
+
+↓
+
+Update Replica 4
+
+v2 v2 v2 v2 v1
+
+↓
+
+Update Replica 5
+
+v2 v2 v2 v2 v2
+
+Users continue accessing the application throughout the update.
+
+# Step 1 – Update app.js
+
+Open:
+
+employee-management-system/
+└── employee-service/
+    └── app.js
+
+const express = require("express");
+const os = require("os");
+
+const app = express();
+
+app.get("/", (req, res) => {
+    res.send(`
+        <h1>Employee Service - Version 2</h1>
+        <h2>Docker Swarm Rolling Update Demo</h2>
+        <p>Container: ${os.hostname()}</p>
+    `);
+});
+
+app.listen(3001, () => {
+    console.log("Employee Service running on port 3001");
+});

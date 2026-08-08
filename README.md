@@ -158,7 +158,7 @@ xxxx             ingress            overlay
 
 ---
 
-Step 4 – Inspect the Network
+# Step 4 – Inspect the Network
 
 Run: docker network inspect employee-network
 

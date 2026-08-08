@@ -168,7 +168,7 @@ Run: docker network inspect employee-network
 
 ---
 
-# Deploy Your First Swarm Service
+# Deploy our First Swarm Service
 
 # Step 1 – Stop the Existing Employee Service Container
 

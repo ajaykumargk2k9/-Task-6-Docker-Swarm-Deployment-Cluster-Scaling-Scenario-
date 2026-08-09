@@ -520,4 +520,4 @@ Right now our service looks like this:
       ┌──────────┬──────────┬──────────┬──────────┬──────────┐
       │          │          │          │          │
    Replica1   Replica2   Replica3   Replica4   Replica5
-        v1         v1         v1         v1         v1
+    v1         v1         v1         v1         v1

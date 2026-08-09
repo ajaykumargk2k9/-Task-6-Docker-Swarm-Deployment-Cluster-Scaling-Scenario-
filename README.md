@@ -517,7 +517,7 @@ Right now our service looks like this:
 
 All replicas are running the same image.
 
-Step 1 – Update the Application
+# Step 1 – Update the Application
 
 Open
 
@@ -532,6 +532,7 @@ employee-management-system
 Replace our existing app.js with:
 
 const express = require("express");
+
 const os = require("os");
 
 const app = express();
@@ -539,6 +540,7 @@ const app = express();
 app.get("/", (req, res) => {
 
     res.send(`
+    
         <h1>Employee Service - Version 2</h1>
 
         <h2>Docker Swarm Rolling Update Demo</h2>
@@ -556,3 +558,91 @@ app.listen(3001, () => {
     console.log("Employee Service Version 2 running on port 3001");
 
 });
+
+---
+
+# Why Are We Adding These?
+
+Instead of simply displaying
+
+Employee Service
+
+we'll now display
+
+Employee Service Version 2
+
+plus
+
+Container ID
+
+plus
+
+Current Time
+
+---
+
+# Step 2 – Build Version 2
+
+Navigate to:
+
+cd employee-service
+
+Build:
+
+docker build -t employee-management-system-employee-service:v2 .
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/rolling%20build.PNG?raw=true)
+
+---
+
+# Step 3 – Verify Images
+
+docker images
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/rolling%20images.PNG?raw=true)
+
+---
+
+# Step 4 – Rolling Update
+
+Now update the running service.
+
+docker service update --image employee-management-system-employee-service:v2 employee-service
+
+Notice Docker replaces one container at a time instead of stopping everything.
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/rolling%20service%20update.PNG?raw=true)
+
+---
+
+# Step 5 – Observe the Rolling Update
+
+Run: docker service ps employee-service
+
+You'll notice older tasks marked as Shutdown and new tasks created using the v2 image.
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/rolling%20service%20ps.PNG?raw=true)
+
+---
+
+# Step 6 – Verify in Browser
+
+Open:
+
+http://localhost:3001
+
+Refresh 10–15 times.
+
+You should notice:
+
+✅ Version 2 displayed.
+✅ Different container hostnames appearing.
+✅ The page remains available during the update.
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/Rolling%20update%20enterprise%201.PNG?raw=true)
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/Rolling%20update%20enterprise%202.PNG?raw=true)
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/Rolling%20update%20enterprise%203.PNG?raw=true)
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/Rolling%20update%20enterprise%204.PNG?raw=true)

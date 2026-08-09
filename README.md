@@ -673,6 +673,127 @@ and deploy everything using one command.
 
 docker stack deploy -c docker-stack.yml employee-management
 
----
+# Enterprise architecture
+
+Our application will become like this
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/Enterprise%20architecture%20stack.PNG?raw=true)
 
 
+# Step 1 – Create docker-stack.yml
+
+Create a new file in the project root.
+
+employee-management-system/
+
+docker-stack.yml
+
+# Paste the following
+
+version: "3.9"
+
+services:
+
+  employee-service:
+    image: employee-management-system-employee-service:v2
+    networks:
+      - employee-network
+    ports:
+      - "3001:3001"
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: any
+
+  department-service:
+    image: employee-management-system-department-service:latest
+    networks:
+      - employee-network
+    ports:
+      - "3002:3002"
+    deploy:
+      replicas: 2
+
+  payroll-service:
+    image: employee-management-system-payroll-service:latest
+    networks:
+      - employee-network
+    ports:
+      - "3003:3003"
+    deploy:
+      replicas: 2
+
+  attendance-service:
+    image: employee-management-system-attendance-service:latest
+    networks:
+      - employee-network
+    ports:
+      - "3004:3004"
+    deploy:
+      replicas: 2
+
+  nginx:
+    image: employee-management-system-nginx:latest
+    networks:
+      - employee-network
+    ports:
+      - "80:80"
+    deploy:
+      replicas: 1
+
+networks:
+
+  employee-network:
+    external: true
+
+# Why Are We Using external: true?
+
+Because you already created:
+
+docker network create \
+--driver overlay \
+employee-network
+
+We don't want Docker Stack to create another overlay network.
+
+Instead it uses the existing one.
+
+# Step 2 – Remove Existing Swarm Service
+
+Right now we already have
+
+employee-service running.
+
+Remove it.
+
+docker service rm employee-service
+
+Wait about 20 seconds.
+
+Verify: docker service ls
+
+It should be empty.
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/docker%20service%20ls%20stack.PNG?raw=true)
+
+# Step 3 – Deploy the Stack
+
+Run: docker stack deploy -c docker-stack.yml employee-management
+
+# Step 4 – Verify Stack
+
+Run: docker stack ls
+
+# Step 5 – View Services
+
+docker stack services employee-management
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/docker%20deploy%20verify%20view%20services%20stack.PNG?raw=true)
+
+# Step 6 – View Tasks
+
+docker stack ps employee-management
+
+We'll see every container in the stack.
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/docker%20view%20tasks%20stack.PNG?raw=true)

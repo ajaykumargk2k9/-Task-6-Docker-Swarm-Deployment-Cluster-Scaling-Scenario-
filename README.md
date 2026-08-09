@@ -506,3 +506,18 @@ Refresh the page several times.
 The hostname may change as different replicas serve your requests.
 
 ![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/Rolling%20employee%20service.PNG?raw=true)
+
+---
+
+# Enterprise Rolling Updates
+
+Right now our service looks like this:
+
+                    Docker Swarm
+                         │
+                 Employee Service
+                         │
+      ┌──────────┬──────────┬──────────┬──────────┬──────────┐
+      │          │          │          │          │
+   Replica1   Replica2   Replica3   Replica4   Replica5
+        v1         v1         v1         v1         v1

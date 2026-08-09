@@ -649,4 +649,30 @@ You should notice:
 
 ![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/Rolling%20update%20enterprise%204.PNG?raw=true)
 
+---
+
+# Docker Stack (Enterprise Deployment)
+
+# Before Docker Stack
+
+Currently we've deployed only one service manually:
+
+docker service create --name employee-service ...
+
+If you have 30 microservices that's 30 commands.
+
+Difficult to manage.
+
+# Docker Stack Solves This
+
+Instead of many commands we create one YAML file.
+
+docker-stack.yml
+
+and deploy everything using one command.
+
+docker stack deploy -c docker-stack.yml employee-management
+
+---
+
 

@@ -513,11 +513,46 @@ The hostname may change as different replicas serve your requests.
 
 Right now our service looks like this:
 
-                    Docker Swarm
-                         │
-                 Employee Service
-                         │
-      ┌──────────┬──────────┬──────────┬──────────┬──────────┐
-      │          │          │          │          │
-   Replica1   Replica2   Replica3   Replica4   Replica5
-    v1         v1         v1         v1         v1
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/Current%20rolling%20architecture.PNG?raw=true)
+
+All replicas are running the same image.
+
+Step 1 – Update the Application
+
+Open
+
+employee-management-system
+    │
+    
+    └── employee-service
+            │
+            
+            └── app.js
+
+Replace our existing app.js with:
+
+const express = require("express");
+const os = require("os");
+
+const app = express();
+
+app.get("/", (req, res) => {
+
+    res.send(`
+        <h1>Employee Service - Version 2</h1>
+
+        <h2>Docker Swarm Rolling Update Demo</h2>
+
+        <p><b>Container:</b> ${os.hostname()}</p>
+
+        <p><b>Date:</b> ${new Date()}</p>
+
+    `);
+
+});
+
+app.listen(3001, () => {
+
+    console.log("Employee Service Version 2 running on port 3001");
+
+});

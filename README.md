@@ -636,7 +636,9 @@ Refresh 10–15 times.
 You should notice:
 
 ✅ Version 2 displayed.
+
 ✅ Different container hostnames appearing.
+
 ✅ The page remains available during the update.
 
 ![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/Rolling%20update%20enterprise%201.PNG?raw=true)
@@ -646,3 +648,5 @@ You should notice:
 ![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/Rolling%20update%20enterprise%203.PNG?raw=true)
 
 ![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/Rolling%20update%20enterprise%204.PNG?raw=true)
+
+

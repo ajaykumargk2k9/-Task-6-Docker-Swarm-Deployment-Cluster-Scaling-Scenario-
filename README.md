@@ -797,3 +797,83 @@ docker stack ps employee-management
 We'll see every container in the stack.
 
 ![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/docker%20view%20tasks%20stack.PNG?raw=true)
+
+---
+
+# Docker Secrets (Enterprise Security)
+
+# Why Docker Secrets?
+
+Our application may have values like:
+
+DB_HOST=mysql
+DB_USER=root
+DB_PASSWORD=admin123
+JWT_SECRET=mysecretkey
+API_KEY=123456789
+
+# Where are these stored?
+
+Usually in:
+
+.env
+docker-compose.yml
+Dockerfile
+GitHub
+
+This is not secure because anyone with repository access can read them.
+
+---
+
+# Without Secrets:
+
+GitHub Repository
+        │
+        ▼
+        
+docker-compose.yml
+
+DB_PASSWORD=admin123 
+
+Anyone can see the password.
+
+---
+
+# With Docker Secrets:
+
+GitHub
+      │
+      ▼
+      
+docker-stack.yml
+
+DB_PASSWORD=/run/secrets/db_password 
+
+           │
+           ▼
+           
+Docker Swarm Secret Store
+
+Only the running container can access the secret.
+
+---
+
+# Why Can't Use Environment Variables?
+
+Because environment variables:
+
+appear in docker inspect
+
+can appear in logs
+
+may be exposed through debugging tools
+
+Secrets are mounted as temporary files under:
+
+/run/secrets/
+
+Only the container can read them.
+
+---
+
+

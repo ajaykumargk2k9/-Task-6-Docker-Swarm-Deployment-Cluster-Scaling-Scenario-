@@ -881,6 +881,81 @@ Only the container can read them.
 
 ---
 
+# Here we go with the secrets 
 
+# Step 1 – Create a Secret
 
+Open Terminal
 
+Create a password file:
+
+Verify:
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/db_secrets.PNG?raw=true)
+
+# Step 2 – Create the Swarm Secret
+
+Run: docker secret create db_password db_password.txt
+
+# Step 3 – Verify
+
+docker secret ls
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/db_secrets%20created.PNG?raw=true)
+
+# Step 4 - Update docker-stack.yml with the secrets section.
+
+version: "3.9"
+
+services:
+
+  employee-service:
+  
+    image: employee-management-system-employee-service:v2
+
+    secrets:
+    
+      - db_password
+
+    networks:
+    
+      - employee-network
+
+    ports:
+      - "3001:3001"
+
+    deploy:
+    
+      replicas: 3
+      
+      restart_policy:
+      
+        condition: any
+
+# Step 5 – Redeploy the Stack
+
+Run: docker stack deploy -c docker-stack.yml employee-management
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/deploy%20stack%20secrets.PNG?raw=true)
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/deploy%20stack%20secrets%20extension.PNG?raw=true)
+
+# Step 6 – Verify the Secret
+
+Verify the service 
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/deploy%20stack%20inspect.PNG?raw=true)
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/deploy%20stack%20inspect%20extension.PNG?raw=true)
+
+Check the new container
+
+docker exec -it <employee-container-id> sh
+
+Run: ls /run/secrets
+
+Then: cat /run/secrets/db_password
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/deploy%20stack%20docker%20ps.PNG?raw=true)
+
+![image alt](https://github.com/ajaykumargk2k9/-Task-6-Docker-Swarm-Deployment-Cluster-Scaling-Scenario-/blob/main/Images/deploy%20stack%20docker%20ps%20extension.PNG?raw=true)

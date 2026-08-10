@@ -830,7 +830,6 @@ This is not secure because anyone with repository access can read them.
 GitHub Repository
         │
         ▼
-        
 docker-compose.yml
 
 DB_PASSWORD=admin123 
@@ -843,12 +842,10 @@ Anyone can see the password.
 
 GitHub
       │
-      ▼
-      
+      ▼    
 docker-stack.yml
 
 DB_PASSWORD=/run/secrets/db_password 
-
            │
            ▼
            
